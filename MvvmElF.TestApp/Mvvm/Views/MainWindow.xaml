@@ -1,0 +1,68 @@
+﻿<Window x:Class="MvvmElF.TestApp.Mvvm.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MvvmElF.TestApp"
+        xmlns:vm="clr-namespace:MvvmElF.TestApp.Mvvm.ViewModels"
+        TextOptions.TextFormattingMode="Display"
+        FontFamily="Verdana" FontSize="12"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel, IsDesignTimeCreatable=True}"
+        Title="MainWindow" Height="250" Width="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+
+            <Button Height="23" Margin="5"
+                    Content="Открыть параллельное окно"
+                    Command="{Binding Path=OpenSecondWindow}" />
+
+            <Button Height="23" Margin="5"
+                    Content="Открыть модальное окно"
+                    Command="{Binding Path=OpenSecondWindowModal}" />
+
+            <Button Height="50" Margin="5"
+                    Command="{Binding Path=OpenSecondWindowWithActiveOwner}">
+                <TextBlock TextAlignment="Center">Открыть параллельное окно, <LineBreak/> владельцем которого является <LineBreak/> активное окно</TextBlock>
+            </Button>
+
+            <Button Height="40" Margin="5"
+                    Command="{Binding Path=SendMessageToSecondWindow}">
+                <TextBlock TextAlignment="Center">Отправить сообщение во <LineBreak/>  второе окно</TextBlock>
+            </Button>
+
+            <Button Height="23" Margin="5" x:Name="bDialogTestApp"
+                    Content="Тест диалогового окна"
+                    Command="{Binding Path=DialogTestApp}" 
+                    CommandParameter="{Binding Path=Content, ElementName=bDialogTestApp}"/>
+
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+
+            <Button Height="23" Margin="5"
+                    Content="{Binding Path=ButtonText}"
+                    Command="{Binding Path=ChangeProperty}" />
+
+            <Button Height="23" Margin="5"
+                    Content="Открыть файл" 
+                    Command="{Binding Path=OpenFile}"/>
+
+            <Button Height="23" Margin="5"
+                    Content="Открыть файлы" 
+                    Command="{Binding Path=OpenFiles}"/>
+
+            <Button Height="23" Margin="5"
+                    Content="Сохранить файл" 
+                    Command="{Binding Path=SaveFile}"/>
+
+            <Button Height="23" Margin="5"
+                    Content="Выбор папки" 
+                    Command="{Binding Path=OpenFolder}"/>
+
+        </StackPanel>
+    </Grid>
+</Window>
